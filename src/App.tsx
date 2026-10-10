@@ -3,6 +3,7 @@ import { AppLayout } from "@/components/AppLayout"
 import { SectionPlaceholder } from "@/pages/SectionPlaceholder"
 import { ThemeConcepts } from "@/pages/ThemeConcepts"
 import { ComponentPage } from "@/pages/ComponentPage"
+import { Examples } from "@/pages/Examples"
 import { LayoutLab } from "@/pages/LayoutLab"
 import { components } from "@/gallery/registry"
 import { sections } from "@/sections"
@@ -19,6 +20,8 @@ export default function App() {
             <Route key={section.path} path={section.path} element={
                 section.path === "/laboratorio" ? (
                   <LayoutLab />
+                ) : section.path === "/exemplos" ? (
+                  <Examples section={section} />
                 ) : section.path === "/tema" ? (
                   <ThemeConcepts section={section} />
                 ) : section.path === "/galeria" ? (
