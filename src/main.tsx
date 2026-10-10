@@ -2,6 +2,10 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import App from "./App"
 import "./index.css"
+import { applyTheme, loadTheme } from "./theme/theme"
+
+// Apply the saved theme before first paint to avoid a flash of the default theme.
+applyTheme(loadTheme(), window.matchMedia("(prefers-color-scheme: dark)").matches)
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

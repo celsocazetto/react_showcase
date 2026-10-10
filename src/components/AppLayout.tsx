@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { ThemeEditor } from "@/components/ThemeEditor"
 import { cn } from "@/lib/utils"
 import { sections } from "@/sections"
 
@@ -34,6 +35,7 @@ export function AppLayout() {
 
   return (
     <div className="min-h-screen md:flex">
+      <ThemeEditor />
       <aside className="hidden w-64 shrink-0 border-r bg-sidebar p-4 md:block">
         <p className="mb-4 px-3 text-lg font-semibold">React Showcase</p>
         <SidebarNav />

@@ -2,9 +2,11 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router"
 import { AppLayout } from "@/components/AppLayout"
 import { SectionPlaceholder } from "@/pages/SectionPlaceholder"
 import { sections } from "@/sections"
+import { ThemeProvider } from "@/theme/ThemeProvider"
 
 export default function App() {
   return (
+    <ThemeProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
@@ -16,5 +18,6 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   )
 }
