@@ -3,6 +3,7 @@ import { AppLayout } from "@/components/AppLayout"
 import { SectionPlaceholder } from "@/pages/SectionPlaceholder"
 import { ThemeConcepts } from "@/pages/ThemeConcepts"
 import { ComponentPage } from "@/pages/ComponentPage"
+import { LayoutLab } from "@/pages/LayoutLab"
 import { components } from "@/gallery/registry"
 import { sections } from "@/sections"
 import { ThemeProvider } from "@/theme/ThemeProvider"
@@ -16,7 +17,9 @@ export default function App() {
           <Route index element={<Navigate to={sections[0].path} replace />} />
           {sections.map((section) => (
             <Route key={section.path} path={section.path} element={
-                section.path === "/tema" ? (
+                section.path === "/laboratorio" ? (
+                  <LayoutLab />
+                ) : section.path === "/tema" ? (
                   <ThemeConcepts section={section} />
                 ) : section.path === "/galeria" ? (
                   <Navigate to={`/galeria/${components[0].slug}`} replace />

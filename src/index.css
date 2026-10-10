@@ -69,3 +69,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Classes assembled at runtime by the Laboratório de Layout (src/lab/layout.ts). */
+@source inline("{,@3xl:,@5xl:}grid-cols-{1,2,3,4}");
+@source inline("{,@3xl:}flex-{row,col}");
+@source inline("{gap,p,m}-{0,2,4,8}");
+@source inline("justify-{start,center,end,between}");
+@source inline("items-{start,center,end,stretch}");
+@source inline("max-w-{sm,md,lg,xl}");
