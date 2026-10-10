@@ -12,7 +12,7 @@ function ToastDemo({ variant, duration, description, closeButton }: { variant: "
       <Button size="sm" onClick={() => setOpen(true)}>
         Abrir
       </Button>
-      <Toast key={`${variant}-${duration}`} variant={variant} open={open} onOpenChange={setOpen} duration={durations[duration]}>
+      <Toast variant={variant} open={open} onOpenChange={setOpen} duration={durations[duration]}>
         <div className="grid gap-1">
           <ToastTitle>{variant === "destructive" ? "Falha ao salvar" : "Alterações salvas"}</ToastTitle>
           {description && <ToastDescription>{variant === "destructive" ? "Tente novamente em instantes." : "Tudo certo com o seu perfil."}</ToastDescription>}
