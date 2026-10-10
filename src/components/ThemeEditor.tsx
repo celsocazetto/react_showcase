@@ -122,9 +122,85 @@ function ColorPicker({
   )
 }
 
-export function ThemeEditor() {
+export function ThemeControls({ className }: { className?: string }) {
   const { theme, update } = useTheme()
 
+  return (
+    <div className={cn("flex flex-col gap-6", className)}>
+      <Control concept="Cor primária (primary color token)" hint="Cor principal de botões, links e foco.">
+        <ColorPicker label="Cor primária" value={theme.primary} onChange={(primary) => update({ primary })} />
+      </Control>
+      <Control concept="Cor de destaque (accent color token)" hint="Cor suave de hover e itens selecionados.">
+        <ColorPicker
+          label="Cor de destaque"
+          value={theme.accent}
+          onChange={(accent) => update({ accent })}
+          allowNeutral
+        />
+      </Control>
+      <Control concept="Raio das bordas (border radius)" hint="De quadrado a bem arredondado.">
+        <input
+          type="range"
+          min={0}
+          max={1.5}
+          step={0.125}
+          value={theme.radius}
+          aria-label="Raio das bordas"
+          onChange={(e) => update({ radius: Number(e.target.value) })}
+          className="w-full accent-primary"
+        />
+        <p className="text-xs text-muted-foreground">--radius: {theme.radius}rem</p>
+      </Control>
+      <Control concept="Modo de cor (color scheme)" hint="Sistema segue o sistema operacional.">
+        <Choice<ModePreference>
+          label="Modo de cor"
+          value={theme.mode}
+          onChange={(mode) => update({ mode })}
+          options={[
+            { value: "system", label: "Sistema" },
+            { value: "light", label: "Claro" },
+            { value: "dark", label: "Escuro" },
+          ]}
+        />
+      </Control>
+      <Control concept="Tipografia (font family)" hint="A família de fonte de todo o texto.">
+        <Choice<string>
+          label="Fonte"
+          value={theme.font}
+          onChange={(font) => update({ font })}
+          options={fonts.map((f) => ({ value: f.id, label: f.id, style: { fontFamily: f.stack } }))}
+        />
+      </Control>
+      <Control concept="Elevação (elevation / box-shadow)" hint="Intensidade das sombras que dão ideia de profundidade.">
+        <input
+          type="range"
+          min={0}
+          max={3}
+          step={1}
+          value={theme.shadow}
+          aria-label="Intensidade da sombra"
+          onChange={(e) => update({ shadow: Number(e.target.value) })}
+          className="w-full accent-primary"
+        />
+        <p className="text-xs text-muted-foreground">Nível {theme.shadow} de 3</p>
+      </Control>
+      <Control concept="Densidade (spacing scale)" hint="Escala do espaçamento: quanto de ar existe entre os elementos.">
+        <Choice<Density>
+          label="Densidade"
+          value={theme.density}
+          onChange={(density) => update({ density })}
+          options={[
+            { value: "compact", label: "Compacto" },
+            { value: "comfortable", label: "Confortável" },
+            { value: "spacious", label: "Espaçoso" },
+          ]}
+        />
+      </Control>
+    </div>
+  )
+}
+
+export function ThemeEditor() {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -145,77 +221,7 @@ export function ThemeEditor() {
             O Tema é um conjunto de design tokens (variáveis CSS) que muda o app inteiro em tempo real.
           </SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col gap-6 px-4 pb-6">
-          <Control concept="Cor primária (primary color token)" hint="Cor principal de botões, links e foco.">
-            <ColorPicker label="Cor primária" value={theme.primary} onChange={(primary) => update({ primary })} />
-          </Control>
-          <Control concept="Cor de destaque (accent color token)" hint="Cor suave de hover e itens selecionados.">
-            <ColorPicker
-              label="Cor de destaque"
-              value={theme.accent}
-              onChange={(accent) => update({ accent })}
-              allowNeutral
-            />
-          </Control>
-          <Control concept="Raio das bordas (border radius)" hint="De quadrado a bem arredondado.">
-            <input
-              type="range"
-              min={0}
-              max={1.5}
-              step={0.125}
-              value={theme.radius}
-              aria-label="Raio das bordas"
-              onChange={(e) => update({ radius: Number(e.target.value) })}
-              className="w-full accent-primary"
-            />
-            <p className="text-xs text-muted-foreground">--radius: {theme.radius}rem</p>
-          </Control>
-          <Control concept="Modo de cor (color scheme)" hint="Sistema segue o sistema operacional.">
-            <Choice<ModePreference>
-              label="Modo de cor"
-              value={theme.mode}
-              onChange={(mode) => update({ mode })}
-              options={[
-                { value: "system", label: "Sistema" },
-                { value: "light", label: "Claro" },
-                { value: "dark", label: "Escuro" },
-              ]}
-            />
-          </Control>
-          <Control concept="Tipografia (font family)" hint="A família de fonte de todo o texto.">
-            <Choice<string>
-              label="Fonte"
-              value={theme.font}
-              onChange={(font) => update({ font })}
-              options={fonts.map((f) => ({ value: f.id, label: f.id, style: { fontFamily: f.stack } }))}
-            />
-          </Control>
-          <Control concept="Elevação (elevation / box-shadow)" hint="Intensidade das sombras que dão ideia de profundidade.">
-            <input
-              type="range"
-              min={0}
-              max={3}
-              step={1}
-              value={theme.shadow}
-              aria-label="Intensidade da sombra"
-              onChange={(e) => update({ shadow: Number(e.target.value) })}
-              className="w-full accent-primary"
-            />
-            <p className="text-xs text-muted-foreground">Nível {theme.shadow} de 3</p>
-          </Control>
-          <Control concept="Densidade (spacing scale)" hint="Escala do espaçamento: quanto de ar existe entre os elementos.">
-            <Choice<Density>
-              label="Densidade"
-              value={theme.density}
-              onChange={(density) => update({ density })}
-              options={[
-                { value: "compact", label: "Compacto" },
-                { value: "comfortable", label: "Confortável" },
-                { value: "spacious", label: "Espaçoso" },
-              ]}
-            />
-          </Control>
-        </div>
+        <ThemeControls className="px-4 pb-6" />
       </SheetContent>
     </Sheet>
   )
