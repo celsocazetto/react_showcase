@@ -5,26 +5,36 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { ThemeEditor } from "@/components/ThemeEditor"
 import { cn } from "@/lib/utils"
+import { galleryCategories } from "@/gallery/registry"
 import { sections } from "@/sections"
+
+const linkClass = ({ isActive }: { isActive: boolean }) =>
+  cn(
+    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent",
+    isActive ? "bg-accent text-accent-foreground" : "text-muted-foreground",
+  )
 
 function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav aria-label="Seções" className="flex flex-col gap-1">
       {sections.map(({ path, title, icon: Icon }) => (
-        <NavLink
-          key={path}
-          to={path}
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent",
-              isActive ? "bg-accent text-accent-foreground" : "text-muted-foreground",
-            )
-          }
-        >
-          <Icon className="size-4" />
-          {title}
-        </NavLink>
+        <div key={path} className="flex flex-col gap-1">
+          <NavLink to={path} end={path === "/galeria"} onClick={onNavigate} className={linkClass}>
+            <Icon className="size-4" />
+            {title}
+          </NavLink>
+          {path === "/galeria" &&
+            galleryCategories.map(({ category, items }) => (
+              <div key={category} className="ml-4 border-l pl-3">
+                <p className="mt-2 px-3 text-xs font-semibold uppercase text-muted-foreground">{category}</p>
+                {items.map((c) => (
+                  <NavLink key={c.slug} to={`/galeria/${c.slug}`} onClick={onNavigate} className={linkClass}>
+                    {c.name}
+                  </NavLink>
+                ))}
+              </div>
+            ))}
+        </div>
       ))}
     </nav>
   )
