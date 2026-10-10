@@ -32,3 +32,10 @@ describe("gallery definitions", () => {
     },
   )
 })
+
+describe("Exibição de dados", () => {
+  it("registers the 6 data display components", () => {
+    const slugs = components.filter((c) => c.category === "Exibição de dados").map((c) => c.slug)
+    expect(slugs.sort()).toEqual(["avatar", "badge", "card", "progress", "skeleton", "table"])
+  })
+})

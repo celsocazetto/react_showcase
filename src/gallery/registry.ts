@@ -1,3 +1,9 @@
+import { avatar } from "./definitions/avatar"
+import { badge } from "./definitions/badge"
+import { card } from "./definitions/card"
+import { progress } from "./definitions/progress"
+import { skeleton } from "./definitions/skeleton"
+import { table } from "./definitions/table"
 import { button } from "./definitions/button"
 import { checkbox } from "./definitions/checkbox"
 import { datePicker } from "./definitions/date-picker"
@@ -24,6 +30,12 @@ export const components: ComponentDefinition[] = [
   switchDef,
   slider,
   datePicker,
+  card,
+  table,
+  badge,
+  avatar,
+  progress,
+  skeleton,
 ]
 
 export function findComponent(slug: string) {
