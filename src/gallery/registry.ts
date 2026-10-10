@@ -1,3 +1,11 @@
+import { accordion } from "./definitions/accordion"
+import { breadcrumb } from "./definitions/breadcrumb"
+import { command } from "./definitions/command"
+import { pagination } from "./definitions/pagination"
+import { tabs } from "./definitions/tabs"
+import { resizable } from "./definitions/resizable"
+import { scrollArea } from "./definitions/scroll-area"
+import { separator } from "./definitions/separator"
 import { alert } from "./definitions/alert"
 import { dialog } from "./definitions/dialog"
 import { popover } from "./definitions/popover"
@@ -48,6 +56,14 @@ export const components: ComponentDefinition[] = [
   dialog,
   sheet,
   popover,
+  accordion,
+  breadcrumb,
+  command,
+  pagination,
+  tabs,
+  resizable,
+  scrollArea,
+  separator,
 ]
 
 export function findComponent(slug: string) {

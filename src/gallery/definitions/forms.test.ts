@@ -47,3 +47,12 @@ describe("Feedback", () => {
     for (const c of items) expect(c.props.length).toBeGreaterThanOrEqual(2), expect(c.props.length).toBeLessThanOrEqual(4)
   })
 })
+
+describe("Navegação e Layout", () => {
+  it("registers the 5 navigation and 3 layout components with Controles", () => {
+    const by = (cat: string) => components.filter((c) => c.category === cat)
+    expect(by("Navegação").map((c) => c.slug).sort()).toEqual(["accordion", "breadcrumb", "command", "pagination", "tabs"])
+    expect(by("Layout").map((c) => c.slug).sort()).toEqual(["resizable", "scroll-area", "separator"])
+    for (const c of [...by("Navegação"), ...by("Layout")]) expect(c.props.length).toBeGreaterThanOrEqual(1)
+  })
+})
