@@ -1,3 +1,9 @@
+import { alert } from "./definitions/alert"
+import { dialog } from "./definitions/dialog"
+import { popover } from "./definitions/popover"
+import { sheet } from "./definitions/sheet"
+import { toast } from "./definitions/toast"
+import { tooltip } from "./definitions/tooltip"
 import { avatar } from "./definitions/avatar"
 import { badge } from "./definitions/badge"
 import { card } from "./definitions/card"
@@ -36,6 +42,12 @@ export const components: ComponentDefinition[] = [
   avatar,
   progress,
   skeleton,
+  alert,
+  toast,
+  tooltip,
+  dialog,
+  sheet,
+  popover,
 ]
 
 export function findComponent(slug: string) {

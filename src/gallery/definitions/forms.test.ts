@@ -39,3 +39,11 @@ describe("Exibição de dados", () => {
     expect(slugs.sort()).toEqual(["avatar", "badge", "card", "progress", "skeleton", "table"])
   })
 })
+
+describe("Feedback", () => {
+  it("registers the 6 feedback components with 2 to 4 Controles each", () => {
+    const items = components.filter((c) => c.category === "Feedback")
+    expect(items.map((c) => c.slug).sort()).toEqual(["alert", "dialog", "popover", "sheet", "toast", "tooltip"])
+    for (const c of items) expect(c.props.length).toBeGreaterThanOrEqual(2), expect(c.props.length).toBeLessThanOrEqual(4)
+  })
+})
